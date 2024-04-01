@@ -3,6 +3,7 @@ package com.example.demoApp.service;
 import com.example.demoApp.repository.StudentRepo;
 import com.example.demoApp.entity.Student;
 import com.example.demoApp.request.CreateStudentRequest;
+import com.example.demoApp.request.InQueryRequest;
 import com.example.demoApp.request.UpdateStudent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,27 @@ public class StudentService {
     public String deleteStudent(UUID id){
         studentRepo.deleteById(id);
         return "Student has been deleted";
+    }
+    public List<Student> getByName(String name){
+       return studentRepo.findByFirstName(name);
+    }
+    public List<Student> getByFirstNameAndLast(String first, String last){
+        return studentRepo.findByFirstNameAndLastName(first,last);
+    }
+
+    public List<Student> getByEmail(String email){
+        return studentRepo.findByEmail(email);
+    }
+
+    public List<Student> getByFirstNameOrLast(String first, String last){
+        return studentRepo.findByFirstNameOrLastName(first,last);
+    }
+
+    public List<Student> getByFirstNameInLast(String first, String last){
+        return studentRepo.findByFirstNameInLastName(first,last);
+    }
+
+    public List<Student> getByNameIn(InQueryRequest inQueryRequest){
+        return studentRepo.findByFirstNameIn(inQueryRequest.getFirstNames());
     }
 }

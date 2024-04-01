@@ -1,6 +1,7 @@
 package com.example.demoApp.controller;
 
 import com.example.demoApp.request.CreateStudentRequest;
+import com.example.demoApp.request.InQueryRequest;
 import com.example.demoApp.request.UpdateStudent;
 import com.example.demoApp.response.StudentResponse;
 import com.example.demoApp.entity.Student;
@@ -54,5 +55,44 @@ public class StudentController {
       return studentService.deleteStudent(id);
 
    }
+
+   @GetMapping("getByName/{firstName}")
+    public List<StudentResponse> getByName(@PathVariable("firstName") String firstName){
+
+      List<Student> list=  studentService.getByName(firstName);
+       List<StudentResponse> response= new ArrayList<StudentResponse>();
+       list.stream().forEach(student ->
+               response.add(new StudentResponse(student)));
+       return response;
+   }
+
+   @GetMapping("getByFirstAndLastname/{firstName}/{lastName}")
+    public List<StudentResponse> getByFirstAndLastname(@PathVariable String firstName, @PathVariable String lastName){
+       List<Student> list=  studentService.getByFirstNameAndLast(firstName,lastName);
+       List<StudentResponse> response= new ArrayList<StudentResponse>();
+       list.stream().forEach(student ->
+               response.add(new StudentResponse(student)));
+       return response;
+   }
+
+   @GetMapping("getByEmail/{email}")
+    public List<StudentResponse> getByEmail(@PathVariable String email){
+        List<Student> listOfEmails = studentService.getByEmail(email);
+        List<StudentResponse> response = new ArrayList<>();
+        listOfEmails.stream().forEach(e->{
+            response.add(new StudentResponse(e));
+        });
+
+        return response;
+   }
+
+    @GetMapping("getByNameIn")
+    public List<StudentResponse> getByNameIn(@RequestBody InQueryRequest inQueryReqest){
+        List<Student> list=  studentService.getByNameIn(inQueryReqest);
+        List<StudentResponse> response= new ArrayList<StudentResponse>();
+        list.stream().forEach(student ->
+                response.add(new StudentResponse(student)));
+        return response;
+    }
 
 }
