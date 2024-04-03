@@ -14,7 +14,7 @@ public interface StudentRepo extends JpaRepository<Student, UUID> {
 
   List<Student> findByFirstNameOrLastName(String first, String last);
 
-  List<Student> findByFirstNameInLastName(String first, String last);
+//  List<Student> findByFirstNameInLastName(String first, String last);
 
   List<Student> findByFirstNameIn(List<String> firstNames);
 }

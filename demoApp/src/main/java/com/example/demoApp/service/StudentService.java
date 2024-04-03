@@ -54,9 +54,9 @@ public class StudentService {
         return studentRepo.findByFirstNameOrLastName(first,last);
     }
 
-    public List<Student> getByFirstNameInLast(String first, String last){
-        return studentRepo.findByFirstNameInLastName(first,last);
-    }
+//    public List<Student> getByFirstNameInLast(String first, String last){
+//        return studentRepo.findByFirstNameInLastName(first,last);
+//    }
 
     public List<Student> getByNameIn(InQueryRequest inQueryRequest){
         return studentRepo.findByFirstNameIn(inQueryRequest.getFirstNames());
